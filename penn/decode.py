@@ -49,7 +49,6 @@ class Argmax(Decoder):
 
             # Linearly interpolate unvoiced regions
             pitch = penn.convert.bins_to_frequency(bins)
-
         return bins, pitch
 
 
@@ -180,7 +179,7 @@ def expected_value(logits, cents):
 
     # BCE requires normalization
     if penn.LOSS == 'binary_cross_entropy':
-        pitch = pitch / distributions.sum(dim=1)
+        pitch = pitch / distributions.sum(dim=1,keepdims = True)
 
     # Convert to hz
     return penn.convert.cents_to_frequency(pitch)
@@ -203,7 +202,6 @@ def local_expected_value_from_bins(
 
     # Get values in cents
     cents = penn.convert.bins_to_cents(torch.clip(indices - window // 2, 0))
-
     # Decode using local expected value
     return expected_value(torch.gather(padded, 1, indices), cents)
 

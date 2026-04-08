@@ -529,7 +529,7 @@ def infer(frames, checkpoint=None):
         ):
 
             # Initialize model
-            model = penn.Model()
+            model = penn.Model(penn.MODEL)
 
             # Maybe download from HuggingFace
             if checkpoint is None:
@@ -607,7 +607,6 @@ def postprocess(logits, fmin=penn.FMIN, fmax=penn.FMAX, decoder=penn.DECODER):
         else:
             raise ValueError(
                 f'Periodicity method {penn.PERIODICITY} is not defined')
-
         return bins.T, pitch.T, periodicity.T
 
 
