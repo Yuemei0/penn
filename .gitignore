@@ -21,3 +21,9 @@ __pycache__/
 .vscode/
 *.egg-info/
 dist/
+
+
+data/aug_cache/*
+!data/aug_cache/.gitkeep
+data/AUG_datasets/*
+!data/AUG_datasets/.gitkeep

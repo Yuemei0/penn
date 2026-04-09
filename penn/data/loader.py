@@ -25,4 +25,5 @@ def loader(datasets, partition, hparam_search=False):
         batch_size=batch_size,
         num_workers=penn.NUM_WORKERS,
         pin_memory=True,
+        persistent_workers=True,
         sampler=sampler)

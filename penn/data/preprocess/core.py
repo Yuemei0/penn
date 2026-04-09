@@ -68,7 +68,8 @@ def mdb():
         'Preprocessing mdb',
         total=len(audio_files)
     ):
-        stem = f'{i:06d}'
+        # stem = f'{i:06d}'
+        stem = audio_file.stem
 
         # Load and resample audio
         audio = penn.load.audio(audio_file)
@@ -126,7 +127,7 @@ def ptdb():
         file.parent.parent.parent /
         'REF' /
         file.parent.name /
-        file.with_suffix('.f0').name.replace('mic', 'ref')
+        file.with_suffix('.csv').name
         for file in audio_files]
 
     # Create cache
@@ -139,7 +140,8 @@ def ptdb():
         'Preprocessing ptdb',
         total=len(audio_files)
     ):
-        stem = f'{i:06d}'
+        # stem = f'{i:06d}'
+        stem = audio_file.stem
 
         # Load and resample to PTDB sample rate
         audio, sample_rate = torchaudio.load(audio_file)
@@ -165,8 +167,11 @@ def ptdb():
             audio,
             penn.SAMPLE_RATE)
 
+        
+        
         # Load pitch
-        pitch = np.loadtxt(open(pitch_file), delimiter=' ')[:, 0]
+        annotations = np.loadtxt(open(pitch_file), delimiter=',')
+        times, pitch = annotations[:, 0], annotations[:, 1]
 
         # Fill unvoiced regions via linear interpolation
         pitch, voiced = interpolate_unvoiced(pitch)
@@ -174,14 +179,9 @@ def ptdb():
         # Get target number of frames
         frames = penn.convert.samples_to_frames(audio.shape[-1])
 
-        # Get original times
-        times = PTDB_HOPSIZE_SECONDS * np.arange(0, len(pitch))
-        times += PTDB_HOPSIZE_SECONDS / 2
-
         # Linearly interpolate to target number of frames
         new_times = penn.HOPSIZE_SECONDS * np.arange(0, frames)
         new_times += penn.HOPSIZE_SECONDS / 2.
-
         pitch = 2. ** np.interp(new_times, times, np.log2(pitch))
 
         # Linearly interpolate voiced/unvoiced tokens

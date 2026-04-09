@@ -77,10 +77,10 @@ VITERBI_MIN_CHUNK_SIZE = None
 ASSETS_DIR = Path(__file__).parent.parent / 'assets'
 
 # Location of preprocessed features
-CACHE_DIR = Path(__file__).parent.parent.parent / 'data' / 'cache'
+CACHE_DIR = Path(__file__).parent.parent.parent / 'data' / 'aug_cache'
 
 # Location of datasets on disk
-DATA_DIR = Path(__file__).parent.parent.parent / 'data' / 'datasets'
+DATA_DIR = Path(__file__).parent.parent.parent / 'data' / 'AUG_datasets'
 
 # Location to save evaluation artifacts
 EVAL_DIR = Path(__file__).parent.parent.parent / 'eval'
@@ -164,7 +164,7 @@ LEARNING_RATE = 2e-4
 LOSS = 'categorical_cross_entropy'
 
 # Number of training steps
-STEPS = 250000
+STEPS = 500000
 
 # Number of frames used during training
 NUM_TRAINING_FRAMES = 1

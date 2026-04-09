@@ -21,7 +21,7 @@ HOPSIZE_SECONDS = penn.HOPSIZE / penn.SAMPLE_RATE
 
 
 # Location to save dataset partitions
-PARTITION_DIR = penn.ASSETS_DIR / 'partitions'
+PARTITION_DIR = penn.ASSETS_DIR / 'aug_partitions'
 
 
 ###############################################################################
