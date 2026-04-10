@@ -1,0 +1,5 @@
+MODULE = 'penn'
+
+LOCAL_EXPECTED_VALUE = True
+
+CENTS_PER_BIN = 10.

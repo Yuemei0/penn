@@ -45,7 +45,7 @@ def collect_rpa(root_dir):
 
 
 if __name__ == "__main__":
-    root_dir = r"/data/lym/F0_SOTA/penn/eval"   # ← 修改这里
+    root_dir = r"./eval"   # ← 修改这里
 
     df = collect_rpa(root_dir)
 
